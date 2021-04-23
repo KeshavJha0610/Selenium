@@ -1,0 +1,10 @@
+Commands in Hub Machine
+1.Setting Up Hub:
+java -jar selenium-server-standalone-2.44.0.jar -role hub
+2.Validating Hub started 
+http://localhost:4444/grid/console
+Commands in Node Machine
+3.Accessing Hub from Node Machine
+http://iporhostnameofHub:4444/grid/console 
+4.Registering Node with Hub
+Java –jar selenium-server-standalone-2.44.0.jar –role webdriver –hub http://iporhostnameofHub:4444/grid/register -port 5566

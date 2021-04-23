@@ -1,0 +1,186 @@
+1.xpath and css are most used.coz for id there is dependency.for few fields there may not be id/classname/name
+2.Alpha numeric id is not reliable.may vary on every refresh
+3.<a> is for link.
+4.class name with white spaces are not acceptable.will get error compound classes are not acceptable
+5.multiple values - Selenium identifies the first one - scans from top left
+6.double quotes inside double quotes is not accepted.xpath and css can be defined in number of way.
+right click on blue generated code of html and copy xpath to get xpath
+xpath starting from html(firefox) is not reliable-switch browser to get another one
+7.There is no direct way to find css in chrome.you hava to find in tool bar
+8.verify css and xpath from browser tools(in console)
+ex: $x("xpath") - for xpath,$("cssselector") - for css selector
+//tagname[@attribute='value'] - xpath
+tagname[attribute='value'] / [attribute='value'] / tagname#Id or #Id / tagname.classname or .classname- css
+
+9.Regular expression:
+//tagname[contains(@attribute,'value')] -xpath regular expression
+tagname[Attribute*='value'] -css regular expression
+
+10.parent-child relationship xpath- Define xpath for parent/tagnames(parent/child)
+immediate sharp arrow down is parent
+//div[@class='1st-c']/div/div[2]/div/input, div[2] is for second child
+
+11.diff b/w relative and absolute xpath
+directly locating the element without depending on parent nodes is relative xpath
+reaching the child node by traversing through the child node from parent node with the help of *tagnames is absolute xpath
+relative is always preferred than absolute
+
+12.//*[@id='table1']/following-sibling::li[2] - when we have to reach 2nd sibling
+
+in xpath we can traverse back,in css we can't.
+
+//*[text()=' elementname ']-when there is no codebase,don't have attributes,if attributes are not dynamic,or text is like 100 characters.
+need to give exact text,if there is space give the space.
+css is 10 times faster than xpath.
+*if space is there in class name , then replace it with dot(.).
+In most cases id will be unique.
+
+static dropdown in select tag
+dynamic dropdown with indexes
+parent-child relationship xpath
+in xpath we give /  but in css we give space from parent to child
+//driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'](space) //a[@value='MAA']")).click();
+driver.switchTo().alert().accept()(positive); or dismiss();(negative) for alerts
+
+variable name should always be small(mousePad,totalSumValue)-same applicable for methods
+classname should be capital (Miscellaneousconcepts,Tableexercise)
+trim(); - is used to remove white spaces from left or right
+lenght() method to get size of Array and we use size() method to get size of ArrayList.
+
+synchronisation:to tell the driver to wait
+
+implicit wait:declaring wait globally is implicit wait.wait for n number of seconds before you throw exception.
+*defining globally,applicable for entire test case.till driver instance is active.till webdriver is killed.
+ex:if declared 5 seconds(maximum time limit), and element is identified within 2 seconds,then it will not wait for 5 seconds,it will shift to other element.
+Pros:Readable code
+cons:performance issue will not get noticed.
+
+explicit wait:we can target a specific element and it is specific to particular element
+if element is found it will come out.
+pros:wait is applied only at targeted elements.so no performance issues.
+cons:more code we need to write
+
+explicit wait can be achieved in 2 ways
+webdriver wait class implement wait interface
+fluent wait:
+fluent wait finds the web element repeatedly at regular intervals of time until the timeout or till the object gets found.fluentwait = 10 secs,polling 2 secs
+fluent wait syntax
+//Wait<WebDriver> w = new FluentWait<WebDriver>(driver).withTimeout(10,SECONDS).pollingEvery(2,SECONDS).ignoring(NoSuchElementException.class)
+
+
+Thread.sleep() - part of java,it will pause the test for say 5 seconds.even if the results are loaded in 2 seconds,still it will pause for 5 seconds.
+
+*chromedriver is a class which implements webdriver interface
+
+Actions:
+The Selenium WebDriver's Advanced User Interactions API allows us to perform operations from
+keyboard events and simple mouse events to complex events such as dragging-and-dropping,double click on element,context click on element
+holding a key and then performing mouse operations by using the Actions class, and building
+a complex chain of events exactly like a user doing these manually.
+The Actions class implements the builder pattern to create a composite action containing a
+group of other actions
+
+We need to create an instance of the Actions class by passing the instance of driver class
+to the constructor in the following way:
+Actions builder = new Actions(driver);
+
+Frames:
+HTML frames allow developers to present documents in multiple views, which may be
+independent windows or subwindows. Multiple views offer developers a way to keep certain
+information visible, while other views are scrolled or replaced. For example, within the same
+window, one frame might display a static banner, the second a navigation menu, and the third
+the main document that can be scrolled through or replaced by navigating in the second frame.
+
+frames will have <iframe> tag
+frames can be located by webelement,index,id
+
+getting all links in a page:
+System.out.println(driver.findElements(By.tagName("a")).size());
+				
+WebElement footerdriver=driver.findElement(By.id("gf-BIG"));// Limiting webdriver scope
+				
+System.out.println(footerdriver.findElements(By.tagName("a")).size());
+xpath("//table/tbody/tr/td[1]/ul")
+
+string to integer = Integer.parseInt
+
+Javascript executor helps in identifying objects which has hidden elements
+
+Desiredcapabilities is a class to customise chrome browser
+
+Softassertion will not stop the execution
+
+four tests can be completed in one minute becoz they run on 4 nodes parallely
+
+java -jar selenium-server-standalone-3.141.59.jar -role hub  - starting the hub command
+
+ http://192.168.100.4:4444/grid/console - in browser need to enter command
+
+Apache POI - library for java and excel - data driven testing
+
+log4J:
+
+Use log. Error() to log when elements are not displayed in the page or if any validations fail
+
+Use Log. Debug()
+
+When each Selenium action is performed like click, SendKeys, getText()
+
+Use log.info()
+
+When operation is successfully completed ex: After loading page, or after any successful validations
+
+It’s just counterpart to log. Error()
+
+
+default configuration is to print error logs(level= error). Need to provide configuration file (level = trace) for all the statements to print
+
+where to log? - Appenders Tag, console
+
+What to Log?  - Loggers
+
+How to Log? - Appenders Tag, Console
+
+Root is applicable to all Test cases
+
+log4j can be used in all frameworks
+
+Page Object Pattern:
+
+1. Easy to Maintain
+
+2.Easy Readability of Scripts
+
+3.Reduce or Eliminate duplicacy
+
+4.Re-usablity of code
+
+5.Reliablity
+
+oops in framework:
+itestlistener in listener class is implementing interface
+
+driver = initializedriver(); is inheriting from base class
+
+variables are private and access through accessor methods which are public
+
+in base class driver is static , it will not create new object.driver variable will be shared across all the tests/classes.no new memory is created if use static
+
+if we want to run tests in sequential, we use static to have less memory in heap.in parallel running of tests we should not use static,because it can get null pointer exception
+
+AutoIT:
+
+shift focus to the file upload windows
+set text/path into file name edit box
+click open to upload file
+Au3info- record window component objects
+Build Script -scite.exe
+Save it- .au3 extenstion
+Convert file into .exe by compiling .au3 file
+Call .exe file with Runtime class in java into your selenium tests
+
+
+
+
+
+

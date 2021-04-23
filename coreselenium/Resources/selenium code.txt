@@ -1,0 +1,243 @@
+driver.get("https://google.com");//hit url on the browser
+System.out.println(driver.getTitle());//page title is correct
+System.out.println(driver.getCurrentUrl());//validate if you are landed on current url
+driver.navigate().back();
+
+Locators:
+driver.get("https://www.facebook.com");
+//driver.findElement(By.className("inputtext")).sendKeys("hello");
+//driver.findElement(By.id("email")).sendKeys("Keshav");
+//driver.findElement(By.name("pass")).sendKeys("123456");
+//driver.findElement(By.linkText("Forgotten password?")).click();
+driver.findElement(By.cssSelector("#email")).sendKeys("keshav");
+driver.findElement(By.xpath("//*[@id='pass']")).sendKeys("123456");
+driver.findElement(By.xpath("//button[@value='1']")).click();//button is tagname or can give *
+
+xpath:
+driver.findElement(By.xpath("//*[@type='text']")).sendKeys("keshav");
+//		driver.findElement(By.xpath("//*[@id='pass']")).sendKeys("keshav");
+//		driver.findElement(By.xpath("//*[@value='1']")).click();
+		
+		//driver.findElement(By.cssSelector("input[type='text']")).sendKeys("myowncss");
+		driver.findElement(By.cssSelector("input#email")).sendKeys("myowncss");
+
+		driver.findElement(By.cssSelector("[value='1']")).click();
+
+staticDropdown:
+
+WebElement staticDropdown = driver.findElement(By.id("ctl00_mainContent_DropDownListCurrency"));
+		Select dropdown = new Select(staticDropdown);
+		dropdown.selectByIndex(3);
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+		dropdown.selectByVisibleText("AED");
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+		dropdown.selectByValue("INR");
+		System.out.println(dropdown.getFirstSelectedOption().getText());
+
+Alert:
+driver.switchTo().alert().accept();
+
+		driver.findElement(By.id("confirmbtn")).click();
+
+		System.out.println(driver.switchTo().alert().getText());
+
+		driver.switchTo().alert().dismiss();
+
+Actions:
+
+	Actions a = new Actions(driver);
+		WebElement move = driver.findElement(By.cssSelector("a[id='nav-link-accountList']"));
+		a.moveToElement(driver.findElement(By.id("twotabsearchtextbox"))).click().keyDown(Keys.SHIFT).sendKeys("hello").doubleClick().perform();
+		//moves to specific element
+		a.moveToElement(move).contextClick().build().perform();
+		//Drag and drop
+
+
+window handles:
+
+
+		Set<String> windows = driver.getWindowHandles(); // [parentid,childid,subchildId]
+
+		Iterator<String> it = windows.iterator();
+
+		String parentId = it.next();
+
+		String childId = it.next();
+
+		driver.switchTo().window(childId);
+
+		System.out.println(driver.findElement(By.cssSelector(".im-para.red")).getText());
+
+		driver.findElement(By.cssSelector(".im-para.red")).getText();
+
+		String emailId = driver.findElement(By.cssSelector(".im-para.red")).getText().split("at")[1].trim()
+				.split(" ")[0];
+
+		driver.switchTo().window(parentId);
+
+waits:
+
+		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); - implicit wait
+
+       WebDriverWait w = new WebDriverWait(driver, 5);//class for explicit wait (WebDriverWait)
+		w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.promoInfo")));
+
+
+
+fluent wait syntax
+//Wait<WebDriver> w = new FluentWait<WebDriver>(driver).withTimeout(10,SECONDS).pollingEvery(2,SECONDS).ignoring(NoSuchElementException.class)
+
+
+How to verify if links on click are opening a new page?
+
+String clickl = Keys.chord(Keys.CONTROL,Keys.ENTER)
+driver.findElements(By.tagname("a")).sendKeys(clickl)
+
+How to switch to a new window opened in Selenium?
+		
+for(String winHandle : driver.getWindowHandles()) {
+driver.switchTo().window(winHandle);
+}
+
+for scrolling a page and scroll in a table:
+
+JavascriptExecutor js = (JavascriptExecutor)driver;
+		
+		js.executeScript("window.scrollBy(0,500)");
+		Thread.sleep(3000);
+		js.executeScript("document.querySelector('.tableFixHead').scrollTop=5000");
+		
+		
+SSL Certifications:
+
+DesiredCapabilities ch = DesiredCapabilities.chrome();
+		// ch.acceptInsecureCerts();
+		ch.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+		ch.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+		// Belows to your local browser
+		ChromeOptions c = new ChromeOptions();
+		c.merge(ch);
+		System.setProperty("webdriver.chrome.driver", "");
+		WebDriver driver = new ChromeDriver(c);
+
+Screenshot:
+
+driver.get("https://www.google.com");
+		
+		File src=	 ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(src,new File("C:\\Users\\Keshav\\screenshot.png"));
+
+SoftAssert:
+
+SoftAssert a = new SoftAssert();
+
+Broken link:
+
+String url = link.getAttribute("href");
+
+			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+
+			conn.setRequestMethod("HEAD");
+
+			conn.connect();
+
+			int respCode = conn.getResponseCode();
+
+			System.out.println(respCode);
+
+<suite name="Suite" parallel="tests"> - for parallel running, testng --right click--convert to testng --> for testng.xml file
+
+ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>(); - Thread safe
+
+extent.flush();
+
+removehardcoded path:
+
+FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\resources\\data.properties");
+
+headless execution code:
+ChromeOptions options = new ChromeOptions();
+
+options.addArguments("headless");
+
+screenshot:
+
+File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(src,new File("C:\\Users\\Keshav\\screenshot.png"));
+
+cucumber:
+Scenario Outline: for parameterization
+
+Examples:
+|username 		|password   |
+|test99@gmail.com	|123456     |
+|test123@gmail.com  	|12345      |
+
+AbstractTestNGCucumberTests - testrunner with testng
+
+testrunner file:
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+		features = "src/test/java/features",
+		glue="stepdefinition")
+public class TestRunner {
+}
+
+stepdefinition:
+  @When("^User login into application with \"([^\"]*)\" and password \"([^\"]*)\"$")
+    public void user_login_into_application_with_something_and_password_something(String strArg1, String strArg2) throws Throwable {
+    	System.out.println(strArg1);
+    	System.out.println(strArg2);
+
+    	
+    }
+
+feature file:
+Feature: Application Login
+Scenario: Home page default login
+Given User is on NetBanking landing page
+When User login into application with "keshav" and password "1234"
+Then Home page is populated
+And Cards displayed are "true"
+
+AutoIT:
+WebDriver driver=new ChromeDriver(options);
+
+		driver.get("https://altoconvertpdftojpg.com/");
+
+		driver.findElement(By.cssSelector("[class*='btn--choose']")).click();
+
+		Thread.sleep(3000);
+
+		Runtime.getRuntime().exec("C:\\Users\\Keshav\\Documents\\fileupload.exe");
+
+AutoIT script:
+ControlFocus("Open","","Edit1")
+ControlSetText("Open","","Edit1","C:\Users\rahul\Documents\check\visit.pdf")
+ControlClick("Open","","Button1")
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
