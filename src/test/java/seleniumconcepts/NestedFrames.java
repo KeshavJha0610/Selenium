@@ -1,14 +1,12 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-public class Nestedframes {
+public class NestedFrames extends BaseTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    @Test
+    public void nestedFrames() {
         driver.get("http://the-internet.herokuapp.com/");
 
         driver.findElement(By.linkText("Nested Frames")).click();

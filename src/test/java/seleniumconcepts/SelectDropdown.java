@@ -1,15 +1,14 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
-public class Selectdropdown {
+public class SelectDropdown extends BaseTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+    @Test
+    public void selectDropdown() {
         driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
         // dropdown with select tag.if tagname is select then the element will be static
         // object.method.through object we can call methods

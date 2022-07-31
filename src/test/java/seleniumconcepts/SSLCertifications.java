@@ -1,28 +1,53 @@
 package seleniumconcepts;
 
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
 
-public class SSLCertifications {
+import java.util.HashMap;
+import java.util.Map;
 
-    public static void main(String[] args) {
 
-        // Desired capabilities=
-        // general chrome profile
-        DesiredCapabilities ch = DesiredCapabilities.chrome();
-        // ch.acceptInsecureCerts();
-        ch.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-        ch.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+public class SSLCertifications extends BaseTest {
 
-        // Belows to your local browser
-        ChromeOptions c = new ChromeOptions();
-        c.merge(ch);
-        System.setProperty("webdriver.chrome.driver", "");
-        WebDriver driver = new ChromeDriver(c);
+    @Test
+    public void sslCheck() {
+
+        ChromeOptions options = new ChromeOptions();
+
+        Proxy proxy = new Proxy();
+
+        proxy.setHttpProxy("ipaddress:4444");
+
+        options.setCapability("proxy", proxy);
+
+        Map<String, Object> prefs = new HashMap<>();
+
+
+        prefs.put("download.default_directory", "/directory/path");
+
+
+        options.setExperimentalOption("prefs", prefs);
+
+        // FirefoxOptions options1 = new FirefoxOptions();
+
+        // options1.setAcceptInsecureCerts(true);
+
+        // EdgeOptions options2 = new EdgeOptions();
+
+        options.setAcceptInsecureCerts(true);
+
+
+        WebDriver driver = new ChromeDriver(options);
+
+        driver.get("https://expired.badssl.com/");
+
+        System.out.println(driver.getTitle());
+
 
     }
+
 
 }

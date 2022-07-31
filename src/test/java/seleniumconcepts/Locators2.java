@@ -1,13 +1,12 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-public class Locators2 {
+public class Locators2 extends BaseTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+    @Test
+    public void locatorsDemo() {
         driver.get("https://login.salesforce.com");
         driver.findElement(By.name("username")).sendKeys("name");
         driver.findElement(By.id("password")).sendKeys("123456");

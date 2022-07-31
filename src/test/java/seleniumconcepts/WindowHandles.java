@@ -1,18 +1,15 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
 import java.util.Iterator;
 import java.util.Set;
 
-public class Windowhandles {
+public class WindowHandles extends BaseTest {
 
-    public static void main(String[] args) {
-
-
-        WebDriver driver = new ChromeDriver();
+    @Test
+    public void windowHandle() {
 
         driver.get("https://rahulshettyacademy.com/loginpagePractise/#");
 

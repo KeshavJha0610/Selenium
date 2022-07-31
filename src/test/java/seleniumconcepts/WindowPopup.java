@@ -1,13 +1,12 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-public class WindowPopup {
+public class WindowPopup extends BaseTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+    @Test
+    public void windowPopup() {
         //driver.get("https://the-internet.herokuapp.com/");
         //http://username:password@siteurl
         driver.get("http://admin:admin@the-internet.herokuapp.com/");

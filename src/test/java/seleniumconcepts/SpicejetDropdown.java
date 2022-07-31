@@ -1,13 +1,13 @@
 package seleniumconcepts;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
 
-public class SpicejetDropdown {
+public class SpicejetDropdown extends BaseTest {
 
-    public static void main(String[] args) throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
+    @Test
+    public void spicejetDropdown() throws InterruptedException {
+
         driver.get("https://www.spicejet.com/");
         Thread.sleep(3000);
         driver.manage().window().maximize();
@@ -32,7 +32,7 @@ public class SpicejetDropdown {
         System.out.println(driver.findElement(By.xpath("//*[@id='ctl00_mainContent_ddl_destinationStation1_CTXT']")).getAttribute("value"));
         //using parent child relationship
         //in xpath we give /  but in css we give space from parent to child
-		//driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'] //a[@value='MAA']")).click();
+        //driver.findElement(By.xpath("//div[@id='glsctl00_mainContent_ddl_destinationStation1_CTNR'] //a[@value='MAA']")).click();
         driver.findElement(By.cssSelector(".ui-state-default.ui-state-highlight.ui-state-active")).click();
 
     }
